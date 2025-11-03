@@ -34,7 +34,7 @@ if st.sidebar.button("Registrar Movimentação") and not produtos.empty:
     resultado = res.fetchone()[0]
 
     if quantidade_mov > resultado and tipo_movimento == "saida":
-        st.sidebar.error("VALOR MAIOR QUE ESTOQUE!")
+        st.sidebar.error("O Valor digitado é maior que o Total de Estoque Atual!")
 
     else:
         produto_id: int = int(produtos.loc[produtos["nome"] == produto_selecionado, "id"].values[0])
@@ -62,3 +62,4 @@ df_movimentacoes = pd.read_sql(
     "SELECT movimentacoes.id, produtos.nome AS produto, movimentacoes.tipo, movimentacoes.quantidade, movimentacoes.data "
     "FROM movimentacoes JOIN produtos ON movimentacoes.produto_id = produtos.id ORDER BY movimentacoes.data DESC", conn)
 st.table(df_movimentacoes)
+
